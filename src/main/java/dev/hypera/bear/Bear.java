@@ -51,15 +51,6 @@ public class Bear {
         return new BearBuilder();
     }
 
-    public static void main(String[] args) throws Exception {
-        Bear bear = Bear.builder().build();
-        bear.record(Breadcrumb.of("Wholemeal breadcrumb", "This is a test breadcrumb"));
-        Thread.sleep(1000 * 5);
-        bear.record(Breadcrumb.of("Rye breadcrumb", "Another breadcrumb, these could be used for recording actions to help piece together what "
-            + "happened"));
-        System.out.println(bear.generateLog().get());
-    }
-
     public void record(@NotNull Breadcrumb breadcrumb) {
         breadcrumbs.add(breadcrumb);
     }

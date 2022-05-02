@@ -21,11 +21,13 @@
  *  SOFTWARE.
  */
 plugins {
+    id("bear")
     id("java")
 }
 
 group = "dev.hypera"
 version = "0.1.0-SNAPSHOT"
+description = "Simple debugging library"
 
 repositories {
     mavenLocal()

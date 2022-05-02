@@ -20,11 +20,40 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        gradlePluginPortal()
-    }
+plugins {
+    id("net.kyori.indra")
+    id("net.kyori.indra.publishing")
 }
 
-rootProject.name = "bear"
+indra {
+
+    javaVersions {
+        target(8)
+        testWith(8, 11, 17)
+    }
+
+    github("HyperaOfficial", "Bear")
+    mitLicense()
+
+    publishReleasesTo("hyperaReleases", "https://repo.hypera.dev/releases")
+    publishSnapshotsTo("hyperaSnapshots", "https://repo.hypera.dev/snapshots")
+
+    configurePublications {
+        pom {
+            organization {
+                name.set("Hypera Development")
+                url.set("https://hypera.dev/")
+            }
+
+            developers {
+                developer {
+                    id.set("joshuasing")
+                    name.set("Joshua Sing")
+                    timezone.set("Australia/Melbourne")
+                    email.set("joshua@hypera.dev")
+                }
+            }
+        }
+    }
+
+}
