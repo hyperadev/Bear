@@ -40,6 +40,18 @@ public class HeaderImpl implements Header {
     }
 
 
+    public @Nullable String getName() {
+        return name;
+    }
+
+    public @Nullable String getVersion() {
+        return version;
+    }
+
+    public @Nullable Instant getTime() {
+        return time;
+    }
+
     @Override
     public void setTime(@NotNull Instant time) {
         this.time = time;

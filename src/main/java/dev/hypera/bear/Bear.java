@@ -35,6 +35,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Bear {
 
+    private static final @NotNull String VERSION = "0.1.0-SNAPSHOT";
+
     private final @NotNull Header header;
     private final @NotNull Collection<Section> sections;
     private final @NotNull Serializer serializer;
@@ -66,6 +68,11 @@ public class Bear {
 
     public @NotNull List<Breadcrumb> getBreadcrumbs() {
         return breadcrumbs;
+    }
+
+
+    public static @NotNull String getVersion() {
+        return VERSION;
     }
 
 }

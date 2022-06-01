@@ -37,15 +37,15 @@ class BreadcrumbImpl implements Breadcrumb {
         this.time = time;
     }
 
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return title;
     }
 
-    public String getDescription() {
+    public @NotNull String getDescription() {
         return description;
     }
 
-    public Instant getTime() {
+    public @NotNull Instant getTime() {
         return time;
     }
 
