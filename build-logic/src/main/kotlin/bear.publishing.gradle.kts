@@ -20,47 +20,40 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-package dev.hypera.bear.header;
+plugins {
+    id("net.kyori.indra")
+    id("net.kyori.indra.publishing")
+}
 
-import java.time.Instant;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-/**
- * Log header.
- */
-public interface Header {
-
-    /**
-     * Create an empty {@link Header}.
-     *
-     * @return new {@link Header}.
-     */
-    @Contract("-> new")
-    static @NotNull Header of() {
-        return of(null, null);
+indra {
+    javaVersions {
+        target(8)
+        testWith(8, 11, 17)
     }
 
-    /**
-     * Create a new {@link Header} with name and version.
-     *
-     * @param name    Name.
-     * @param version Version.
-     *
-     * @return new {@link Header}.
-     */
-    @Contract("_, _ -> new")
-    static @NotNull Header of(@Nullable String name, @Nullable String version) {
-        return new HeaderImpl(name, version);
+    github("HyperaOfficial", "Bear") {
+        ci(true)
     }
+    mitLicense()
 
+    publishReleasesTo("hyperaReleases", "https://repo.hypera.dev/releases")
+    publishSnapshotsTo("hyperaSnapshots", "https://repo.hypera.dev/snapshots")
 
-    /**
-     * Set {@link Header} time.
-     *
-     * @param instant Time.
-     */
-    void setTime(@NotNull Instant instant);
+    configurePublications {
+        pom {
+            organization {
+                name.set("Hypera Development")
+                url.set("https://hypera.dev/")
+            }
 
+            developers {
+                developer {
+                    id.set("joshuasing")
+                    name.set("Joshua Sing")
+                    timezone.set("Australia/Melbourne")
+                    email.set("joshua@hypera.dev")
+                }
+            }
+        }
+    }
 }

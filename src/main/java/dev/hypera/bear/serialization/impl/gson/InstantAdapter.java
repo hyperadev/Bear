@@ -31,25 +31,42 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Gson {@link Instant} type adapter.
+ */
+@Internal
 public class InstantAdapter extends TypeAdapter<Instant> {
 
     private final @NotNull DateTimeFormatter formatter;
 
+    /**
+     * {@link InstantAdapter} constructor.
+     *
+     * @param formatter {@link DateTimeFormatter} instance.
+     */
+    @Internal
     public InstantAdapter(@NotNull DateTimeFormatter formatter) {
         this.formatter = formatter;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void write(JsonWriter writer, Instant instant) throws IOException {
         if (null == instant) {
             writer.nullValue();
         } else {
-            writer.value(formatter.format(instant));
+            writer.value(this.formatter.format(instant));
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Instant read(JsonReader reader) throws IOException {
         JsonToken token = reader.peek();
@@ -65,7 +82,7 @@ public class InstantAdapter extends TypeAdapter<Instant> {
 
         TemporalAccessor accessor;
         try {
-            accessor = formatter.parse(string);
+            accessor = this.formatter.parse(string);
         } catch (DateTimeParseException ex) {
             return null;
         }

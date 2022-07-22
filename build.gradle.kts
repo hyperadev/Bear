@@ -20,9 +20,16 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
+@Suppress( // https://youtrack.jetbrains.com/issue/KTIJ-19369/
+    "DSL_SCOPE_VIOLATION",
+    "MISSING_DEPENDENCY_CLASS",
+    "UNRESOLVED_REFERENCE_WRONG_RECEIVER",
+    "FUNCTION_CALL_EXPECTED"
+)
 plugins {
-    id("bear")
-    id("java")
+    id("bear.common")
+    id("java-library")
+    alias(libs.plugins.indra.sonatype)
 }
 
 group = "dev.hypera"
@@ -30,23 +37,15 @@ version = "0.1.0-SNAPSHOT"
 description = "Simple debugging library"
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.9.0")
-    implementation("org.jetbrains:annotations:23.0.0")
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    implementation(libs.gson)
+    compileOnlyApi(libs.annotations)
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.test {
-    useJUnitPlatform()
 }

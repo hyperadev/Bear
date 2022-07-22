@@ -28,6 +28,10 @@ import java.lang.management.OperatingSystemMXBean;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Operating system {@link Section}.
+ */
+@SuppressWarnings({ "Unused", "FieldCanBeLocal" })
 public class OperatingSystemSection implements Section {
 
     private static final @NotNull String ID = "os";
@@ -36,12 +40,17 @@ public class OperatingSystemSection implements Section {
     private @Nullable String arch;
     private @Nullable String version;
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public @NotNull String getId() {
         return ID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void generate() {
         OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();

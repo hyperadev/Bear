@@ -28,6 +28,10 @@ import java.lang.management.RuntimeMXBean;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Java {@link Section}.
+ */
+@SuppressWarnings({ "Unused", "FieldCanBeLocal" })
 public class JavaSection implements Section {
 
     private static final @NotNull String ID = "java";
@@ -35,42 +39,47 @@ public class JavaSection implements Section {
     private @Nullable JavaVersionSection vm;
     private @Nullable JavaVersionSection spec;
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public @NotNull String getId() {
         return ID;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void generate() {
-        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
-        vm = new JavaVersionSection(runtimeMXBean.getVmName(), runtimeMXBean.getVmVendor(), runtimeMXBean.getVmVersion());
-        spec = new JavaVersionSection(runtimeMXBean.getSpecName(), runtimeMXBean.getSpecVendor(), runtimeMXBean.getSpecVersion());
+        RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
+        this.vm = new JavaVersionSection(runtime.getVmName(), runtime.getVmVendor(), runtime.getVmVersion());
+        this.spec = new JavaVersionSection(runtime.getSpecName(), runtime.getSpecVendor(), runtime.getSpecVersion());
     }
 
 
-    public static class JavaVersionSection {
+    private final static class JavaVersionSection {
 
         private final @NotNull String name;
         private final @NotNull String vendor;
         private final @NotNull String version;
 
-        public JavaVersionSection(@NotNull String name, @NotNull String vendor, @NotNull String version) {
+        private JavaVersionSection(@NotNull String name, @NotNull String vendor, @NotNull String version) {
             this.name = name;
             this.vendor = vendor;
             this.version = version;
         }
 
         public @NotNull String getName() {
-            return name;
+            return this.name;
         }
 
         public @NotNull String getVendor() {
-            return vendor;
+            return this.vendor;
         }
 
         public @NotNull String getVersion() {
-            return version;
+            return this.version;
         }
 
     }

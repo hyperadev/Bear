@@ -20,41 +20,12 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-plugins {
-    id("net.kyori.indra")
-    id("net.kyori.indra.publishing")
-    id("net.kyori.indra.license-header")
-}
+rootProject.name = "chameleon-build-logic"
 
-indra {
-
-    javaVersions {
-        target(8)
-        testWith(8, 11, 17)
-    }
-
-    github("HyperaOfficial", "Bear")
-    mitLicense()
-
-    publishReleasesTo("hyperaReleases", "https://repo.hypera.dev/releases")
-    publishSnapshotsTo("hyperaSnapshots", "https://repo.hypera.dev/snapshots")
-
-    configurePublications {
-        pom {
-            organization {
-                name.set("Hypera Development")
-                url.set("https://hypera.dev/")
-            }
-
-            developers {
-                developer {
-                    id.set("joshuasing")
-                    name.set("Joshua Sing")
-                    timezone.set("Australia/Melbourne")
-                    email.set("joshua@hypera.dev")
-                }
-            }
+dependencyResolutionManagement {
+    versionCatalogs {
+        register("libs") {
+            from(files("../gradle/libs.versions.toml"))
         }
     }
-
 }

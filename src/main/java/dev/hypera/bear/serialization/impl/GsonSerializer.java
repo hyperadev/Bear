@@ -41,7 +41,10 @@ import java.util.stream.Collectors;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
 
-public class GsonSerializer implements Serializer {
+/**
+ * {@link Gson} {@link Serializer} implementation.
+ */
+public final class GsonSerializer implements Serializer {
 
     private final @NotNull Gson gson;
 
@@ -50,34 +53,49 @@ public class GsonSerializer implements Serializer {
         this.gson = gson;
     }
 
+    /**
+     * Create new {@link GsonSerializer} with custom {@link Gson} instance.
+     *
+     * @param gson {@link Gson} instance to be used.
+     *
+     * @return new {@link GsonSerializer} instance.
+     */
     public static @NotNull GsonSerializer gson(@NotNull Gson gson) {
         return new GsonSerializer(gson);
     }
 
+    /**
+     * Create new {@link GsonSerializer}.
+     *
+     * @return new {@link GsonSerializer} instance.
+     */
     public static @NotNull GsonSerializer plain() {
-        return new GsonSerializer(new GsonBuilder().registerTypeAdapter(
-            TypeToken.get(Instant.class).getType(),
-            new InstantAdapter(DateTimeFormatter.ISO_INSTANT)
-        ).create());
+        return new GsonSerializer(new GsonBuilder().registerTypeAdapter(TypeToken.get(Instant.class).getType(), new InstantAdapter(DateTimeFormatter.ISO_INSTANT)).create());
     }
 
+    /**
+     * Create new {@link GsonSerializer} with pretty printing.
+     *
+     * @return new {@link GsonSerializer} instance.
+     */
     public static @NotNull GsonSerializer pretty() {
-        return new GsonSerializer(new GsonBuilder().setPrettyPrinting().registerTypeAdapter(
-            TypeToken.get(Instant.class).getType(),
-            new InstantAdapter(DateTimeFormatter.ISO_INSTANT)
-        ).create());
+        return new GsonSerializer(new GsonBuilder().setPrettyPrinting().registerTypeAdapter(TypeToken.get(Instant.class).getType(), new InstantAdapter(DateTimeFormatter.ISO_INSTANT)).create());
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public @NotNull String serialize(@NotNull Header header, @NotNull Collection<Section> sections, @NotNull List<Breadcrumb> breadcrumbs) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.putAll(serializeHeader(header));
         map.putAll(sections.stream().collect(Collectors.toMap(Section::getId, s -> s)));
         map.put("breadcrumbs", breadcrumbs);
-        return gson.toJson(map);
+        return this.gson.toJson(map);
     }
 
+    @Internal
     private @NotNull Map<String, Object> serializeHeader(@NotNull Header header) {
         Map<String, Object> fields = new LinkedHashMap<>();
         for (Field field : header.getClass().getDeclaredFields()) {

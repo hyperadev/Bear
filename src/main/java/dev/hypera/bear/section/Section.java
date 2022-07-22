@@ -24,9 +24,21 @@ package dev.hypera.bear.section;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Log section.
+ */
 public interface Section {
 
+    /**
+     * {@link Section} identifier.
+     *
+     * @return identifier.
+     */
     @NotNull String getId();
+
+    /**
+     * Generate this {@link Section}.
+     */
     void generate();
 
 }

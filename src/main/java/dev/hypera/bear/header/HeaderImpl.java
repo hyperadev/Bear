@@ -28,30 +28,22 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Internal
-public class HeaderImpl implements Header {
+@SuppressWarnings({ "Unused", "FieldCanBeLocal" })
+class HeaderImpl implements Header {
 
     private @Nullable String name;
     private @Nullable String version;
     private @Nullable Instant time;
 
+    @Internal
     HeaderImpl(@Nullable String name, @Nullable String version) {
         this.name = name;
         this.version = version;
     }
 
-
-    public @Nullable String getName() {
-        return name;
-    }
-
-    public @Nullable String getVersion() {
-        return version;
-    }
-
-    public @Nullable Instant getTime() {
-        return time;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTime(@NotNull Instant time) {
         this.time = time;

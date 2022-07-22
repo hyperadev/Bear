@@ -25,8 +25,19 @@ package dev.hypera.bear.breadcrumb;
 import java.time.Instant;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Breadcrumb.
+ */
 public interface Breadcrumb {
 
+    /**
+     * Create new {@link Breadcrumb} with title and description.
+     *
+     * @param title       Title.
+     * @param description Description.
+     *
+     * @return new {@link Breadcrumb}.
+     */
     static @NotNull Breadcrumb of(@NotNull String title, @NotNull String description) {
         return new BreadcrumbImpl(title, description, Instant.now());
     }

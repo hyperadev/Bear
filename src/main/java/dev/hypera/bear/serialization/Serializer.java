@@ -29,8 +29,20 @@ import java.util.Collection;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Log serializer.
+ */
 public interface Serializer {
 
+    /**
+     * Serialize new log.
+     *
+     * @param header Log {@link Header}.
+     * @param sections Log {@link Section}s.
+     * @param breadcrumbs {@link Breadcrumb}s to be included.
+     *
+     * @return Serialized log.
+     */
     @NotNull String serialize(@NotNull Header header, @NotNull Collection<Section> sections, @NotNull List<Breadcrumb> breadcrumbs);
 
 }
