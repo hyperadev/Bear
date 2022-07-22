@@ -36,6 +36,10 @@ group = "dev.hypera"
 version = "0.1.0-SNAPSHOT"
 description = "Simple debugging library"
 
+indraSonatype {
+    useAlternateSonatypeOSSHost("s01")
+}
+
 repositories {
     mavenCentral()
 }
