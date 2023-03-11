@@ -18,7 +18,7 @@ build-testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
 build-errorpronePlugin = "net.ltgt.gradle:gradle-errorprone-plugin:2.0.2"
 
 # Miscellaneous
-annotations = "org.jetbrains:annotations:23.1.0"
+annotations = "org.jetbrains:annotations:24.0.1"
 
 [plugins]
 indra-sonatype = { id = "net.kyori.indra.publishing.sonatype", version.ref = "indra" }
