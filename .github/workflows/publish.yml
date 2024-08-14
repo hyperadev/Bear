@@ -43,7 +43,7 @@ jobs:
           gpg_private_key: "${{ secrets.GPG_PRIVATE_KEY }}"
 
       - name: "Publish"
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: "publish"
         env:
